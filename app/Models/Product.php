@@ -92,6 +92,15 @@ class Product extends CoreModel {
         return $results;
     }
 
+    public function findForHomeBackOffice()
+    {
+        $pdo= Database::getPDO();
+        $sql='SELECT * FROM `product` LIMIT 3';
+        $pdoStatement=$pdo->query($sql);
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
+        return $results; 
+    }
+
     /**
      * Get the value of name
      *

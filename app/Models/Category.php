@@ -150,4 +150,13 @@ class Category extends CoreModel {
         
         return $categories;
     }
+
+    public function findForHomeBackOffice()
+    {
+        $pdo= Database::getPDO();
+        $sql='SELECT * FROM `category` LIMIT 3';
+        $pdoStatement=$pdo->query($sql);
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Category');
+        return $results; 
+    }
 }

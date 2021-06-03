@@ -51,7 +51,45 @@ $router->map(
     'main-home'
 );
 
+$router->map(
+    'GET',
+    '/categories',
+    [
+        'method' => 'categories',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'categories'
+);
 
+$router->map(
+    'GET',
+    '/category_add',
+    [
+        'method' => 'categoryAdd',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'category_add'
+);
+
+$router->map(
+    'GET',
+    '/products',
+    [
+        'method' => 'products',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'products'
+);
+
+$router->map(
+    'GET',
+    '/product_add',
+    [
+        'method' => 'productAdd',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'product_add'
+);
 /* -------------
 --- DISPATCH ---
 --------------*/
