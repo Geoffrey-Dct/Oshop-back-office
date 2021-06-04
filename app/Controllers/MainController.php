@@ -31,33 +31,7 @@ class MainController extends CoreController {
         $this->show('main/home', $viewVars);
     }
 
-    public function categories()
-    {
-       
-        $categoryModel = new Category;
-        $categories = $categoryModel->findAll();
-        //dd($categories);
-        $viewVars['categories'] = $categories;
-        $this->show('main/categories', $viewVars);
-    }
+    
 
-    public function categoryAdd()
-    {
-        $this->show('main/category_add');
-    }
-
-    public function products()
-    {
-        $productModel=new Product;
-        $products = $productModel->findAll();
-        //dd($products);
-        $viewVars['products']= $products;
-        $this->show('main/products', $viewVars);
-    }
-
-    public function productAdd()
-    {
-        $this->show('main/product_add');
-    }
 
 }

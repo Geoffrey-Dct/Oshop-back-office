@@ -82,7 +82,7 @@ class Product extends CoreModel {
      * 
      * @return Product[]
      */
-    public function findAll()
+    public static function findAll()
     {
         $pdo = Database::getPDO();
         $sql = 'SELECT * FROM `product`';
@@ -101,6 +101,34 @@ class Product extends CoreModel {
         return $results; 
     }
 
+    /**
+     * Méthode permettant d'insérer une nouvelle catégorie dans la table category
+     * 
+     * @return Product[]
+     */
+    public function insert()
+    {
+        $pdo = Database::getPDO();
+        $sql = "INSERT INTO `product`(name, description, picture, price, rate, status, brand_id, category_id, type_id)
+        VALUES ('{$this->name}', '{$this->description}', '{$this->picture}', '{$this->price}', '{$this->rate}', '{$this->status}', '{$this->brand_id}', '{$this->category_id}', '{$this->type_id}')";
+        
+       // Execution de la requête d'insertion (exec, pas query)
+       $insertedRows = $pdo->exec($sql);
+
+       // Si au moins une ligne ajoutée
+       if ($insertedRows > 0) {
+           // Alors on récupère l'id auto-incrémenté généré par MySQL
+           $this->id = $pdo->lastInsertId();
+
+           // On retourne VRAI car l'ajout a parfaitement fonctionné
+           return true;
+           // => l'interpréteur PHP sort de cette fonction car on a retourné une donnée
+       }
+       
+       // Si on arrive ici, c'est que quelque chose n'a pas bien fonctionné => FAUX
+       return false;
+        
+    }
     /**
      * Get the value of name
      *
@@ -256,7 +284,7 @@ class Product extends CoreModel {
      *
      * @param  int  $category_id
      */ 
-    public function setCategoryId(int $category_id)
+    public function setCategoryId(int $category_id=0)
     {
         $this->category_id = $category_id;
     }

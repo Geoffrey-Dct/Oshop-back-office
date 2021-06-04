@@ -56,7 +56,7 @@ $router->map(
     '/categories',
     [
         'method' => 'categories',
-        'controller' => '\App\Controllers\MainController'
+        'controller' => '\App\Controllers\CategoryController'
     ],
     'categories'
 );
@@ -66,7 +66,7 @@ $router->map(
     '/category_add',
     [
         'method' => 'categoryAdd',
-        'controller' => '\App\Controllers\MainController'
+        'controller' => '\App\Controllers\CategoryController'
     ],
     'category_add'
 );
@@ -76,7 +76,7 @@ $router->map(
     '/products',
     [
         'method' => 'products',
-        'controller' => '\App\Controllers\MainController'
+        'controller' => '\App\Controllers\ProductController'
     ],
     'products'
 );
@@ -86,9 +86,29 @@ $router->map(
     '/product_add',
     [
         'method' => 'productAdd',
-        'controller' => '\App\Controllers\MainController'
+        'controller' => '\App\Controllers\ProductController'
     ],
     'product_add'
+);
+
+$router->map(
+    'POST',
+    '/category/create',
+    [
+        'method'=>'create',
+        'controller'=>'\App\Controllers\CategoryController'
+    ],
+    'category-create'
+);
+
+$router->map(
+    'POST',
+    '/product/create',
+    [
+        'method'=>'create',
+        'controller'=>'\App\Controllers\ProductController'
+    ],
+    'product-create'
 );
 /* -------------
 --- DISPATCH ---
