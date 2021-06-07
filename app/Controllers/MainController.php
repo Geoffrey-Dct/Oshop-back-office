@@ -25,6 +25,7 @@ class MainController extends CoreController {
         $products=$productModel->findForHomeBackOffice();
         $viewVars['categories']=$categories;
         $viewVars['products']=$products;
+        //dd($categories);
         // On appelle la méthode show() de l'objet courant
         // En argument, on fournit le fichier de Vue
         // Par convention, chaque fichier de vue sera dans un sous-dossier du nom du Controller

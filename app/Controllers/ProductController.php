@@ -55,7 +55,7 @@ class ProductController extends CoreController {
         $newProduct->setCategoryId($category_id);
         $newProduct->setTypeId($type_id );
         $newProduct->insert();
-        
+
         header('Location:'.$_SERVER['BASE_URI'].'/products');
         // j'ai besoin des infos qui sont dans $_POST
         // j'ai besoin du model pour inserer en base
@@ -63,6 +63,15 @@ class ProductController extends CoreController {
         // normalement j'affiche quelquechose  ??? lecture CDC
         // CDC dit rediriger vers la liste avec header()
 
+    }
+
+    public function update($param)
+    {
+        $productId = $param;
+
+        $product = Product::find($productId);
+        $viewVars['product']=$product;
+        $this->show('update/product_update',$viewVars);
     }
     
 }

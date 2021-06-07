@@ -1,6 +1,6 @@
 <div class="container my-4">
         <a href="<?=$router->generate('categories')?>" class="btn btn-success float-right">Retour</a>
-        <h2>Ajouter une catégorie</h2>
+        <h2>Mettre à jour une catégorie</h2>
         
         <form action="" method="POST" class="mt-5">
             <div class="form-group">

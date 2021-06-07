@@ -98,7 +98,7 @@ $router->map(
         'method'=>'create',
         'controller'=>'\App\Controllers\CategoryController'
     ],
-    'category-create'
+    'category_create'
 );
 $router->map(
     'GET',
@@ -107,7 +107,7 @@ $router->map(
         'method'=>'update',
         'controller'=>'\App\Controllers\CategoryController'
     ],
-    'category-update'
+    'category_update'
 );
 
 $router->map(
@@ -117,17 +117,17 @@ $router->map(
         'method'=>'create',
         'controller'=>'\App\Controllers\ProductController'
     ],
-    'product-create'
+    'product_create'
 );
 
 $router->map(
     'GET',
-    '/product_update',
+    '/product_update/[i:id]',
     [
         'method'=>'update',
         'controller'=>'\App\Controllers\ProductController'
     ],
-    'product-update'
+    'product_update'
 );
 /* -------------
 --- DISPATCH ---
