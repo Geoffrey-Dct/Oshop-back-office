@@ -156,6 +156,44 @@ class Product extends CoreModel {
         
         return $requeteReussi;
     }
+
+    public function update($id)
+    {
+         // Récupération de l'objet PDO représentant la connexion à la DB
+         $pdo = Database::getPDO();
+
+         $sql = "
+         UPDATE `product`
+          SET `name` = :name,
+            `description`= :description,
+            `picture`= :picture,
+            `price`= :price,
+            `rate`= :rate,
+            `status`= :status,
+            `brand_id`= :brand_id,
+            `category_id`= :category_id,
+            `type_id`= :type_id
+            WHERE `id`= :id";
+
+          $pdoStatement = $pdo->prepare($sql);
+          //dd($pdoStatement);
+
+       
+        $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':name', $this->name, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':description', $this->description, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':picture', $this->picture, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':price', $this->price);// TODO PARAM_FLOAT
+        $pdoStatement->bindValue(':rate', $this->rate, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':status', $this->status, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':brand_id', $this->brand_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':category_id', $this->category_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':type_id', $this->type_id, PDO::PARAM_INT);
+
+        $requeteReussi = $pdoStatement->execute();
+        
+        return $requeteReussi;
+    }
     /**
      * Get the value of name
      *

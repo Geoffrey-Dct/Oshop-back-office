@@ -51,7 +51,7 @@ class CategoryController extends CoreController
 
     }
 
-    public function update($param)
+    public function categoryUpdate($param)
     {
         
         $categoryId = $param;

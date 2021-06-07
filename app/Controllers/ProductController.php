@@ -65,7 +65,7 @@ class ProductController extends CoreController {
 
     }
 
-    public function update($param)
+    public function productUpdate($param)
     {
         $productId = $param;
 
@@ -74,4 +74,32 @@ class ProductController extends CoreController {
         $this->show('update/product_update',$viewVars);
     }
     
+    public function update($param)
+    {
+        $productId = $param;
+
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+        $picture = filter_input(INPUT_POST, 'picture', FILTER_SANITIZE_STRING);
+        $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
+        $rate = filter_input(INPUT_POST, 'rate', FILTER_VALIDATE_INT);
+        $status = filter_input(INPUT_POST, 'status', FILTER_VALIDATE_INT);
+        $category_id = filter_input(INPUT_POST, 'category_id', FILTER_VALIDATE_INT);
+        $brand_id = filter_input(INPUT_POST, 'brand_id', FILTER_VALIDATE_INT);
+        $type_id = filter_input(INPUT_POST, 'type_id', FILTER_VALIDATE_INT);
+        
+        $newProduct = new Product();
+        $newProduct->setName($name);
+        $newProduct->setDescription($description);
+        $newProduct->setPicture($picture);
+        $newProduct->setPrice($price);
+        $newProduct->setRate($rate);
+        $newProduct->setStatus($status );
+        $newProduct->setBrandId( $brand_id);
+        $newProduct->setCategoryId($category_id);
+        $newProduct->setTypeId($type_id );
+        $newProduct->update($productId); 
+
+        header('Location:'.$_SERVER['BASE_URI'].'/products');
+    }
 }

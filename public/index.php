@@ -104,7 +104,7 @@ $router->map(
     'GET',
     '/category_update/[i:id]',
     [
-        'method'=>'update',
+        'method'=>'categoryUpdate',
         'controller'=>'\App\Controllers\CategoryController'
     ],
     'category_update'
@@ -124,10 +124,19 @@ $router->map(
     'GET',
     '/product_update/[i:id]',
     [
-        'method'=>'update',
+        'method'=>'productUpdate',
         'controller'=>'\App\Controllers\ProductController'
     ],
     'product_update'
+);
+$router->map(
+    'POST',
+    '/product_update/[i:id]',
+    [
+        'method'=>'update',
+        'controller'=>'\App\Controllers\ProductController'
+    ],
+    'product_updated'
 );
 /* -------------
 --- DISPATCH ---
