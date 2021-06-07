@@ -108,26 +108,53 @@ class Product extends CoreModel {
      */
     public function insert()
     {
+        // Récupération de l'objet PDO représentant la connexion à la DB
         $pdo = Database::getPDO();
-        $sql = "INSERT INTO `product`(name, description, picture, price, rate, status, brand_id, category_id, type_id)
-        VALUES ('{$this->name}', '{$this->description}', '{$this->picture}', '{$this->price}', '{$this->rate}', '{$this->status}', '{$this->brand_id}', '{$this->category_id}', '{$this->type_id}')";
-        
-       // Execution de la requête d'insertion (exec, pas query)
-       $insertedRows = $pdo->exec($sql);
 
-       // Si au moins une ligne ajoutée
-       if ($insertedRows > 0) {
-           // Alors on récupère l'id auto-incrémenté généré par MySQL
-           $this->id = $pdo->lastInsertId();
+        // Ecriture de la requête INSERT INTO
+        $sql = "
+            INSERT INTO `product` (
+              `name`,
+              `description`,
+              `picture`,
+              `price`,
+              `rate`,
+              `status`,
+              `brand_id`,
+              `category_id`,
+              `type_id`
+            )
+            VALUES (
+              :name,
+              :description,
+              :picture,
+              :price,
+              :rate,
+              :status,
+              :brand_id,
+              :category_id,
+              :type_id
+            )
+        ";
 
-           // On retourne VRAI car l'ajout a parfaitement fonctionné
-           return true;
-           // => l'interpréteur PHP sort de cette fonction car on a retourné une donnée
-       }
-       
-       // Si on arrive ici, c'est que quelque chose n'a pas bien fonctionné => FAUX
-       return false;
+        // PDO prend connaissance des placeholder
+        // et nous donne un PDOStatement pour y affecter les valeurs
+        $pdoStatement = $pdo->prepare($sql);
+
+        $pdoStatement->bindValue(':name', $this->name, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':description', $this->description, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':picture', $this->picture, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':price', $this->price);// TODO PARAM_FLOAT
+        $pdoStatement->bindValue(':rate', $this->rate, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':status', $this->status, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':brand_id', $this->brand_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':category_id', $this->category_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':type_id', $this->type_id, PDO::PARAM_INT);
+        // Le 3e argument permet de préciser "valeur numérique" (PDO::PARAM_STR) ou "autre" (PDO::PARAM_STR)
+        // Puis exécuter la requête SQL préparée
+        $requeteReussi = $pdoStatement->execute();
         
+        return $requeteReussi;
     }
     /**
      * Get the value of name

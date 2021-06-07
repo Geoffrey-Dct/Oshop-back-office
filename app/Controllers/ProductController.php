@@ -33,18 +33,30 @@ class ProductController extends CoreController {
         // de quoi j'ai besoin ??
         //TODO dd($_POST);
         //dd($_POST);
+
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+        $picture = filter_input(INPUT_POST, 'picture', FILTER_SANITIZE_STRING);
+        $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT);
+        $rate = filter_input(INPUT_POST, 'rate', FILTER_VALIDATE_INT);
+        $status = filter_input(INPUT_POST, 'status', FILTER_VALIDATE_INT);
+        $category_id = filter_input(INPUT_POST, 'category_id', FILTER_VALIDATE_INT);
+        $brand_id = filter_input(INPUT_POST, 'brand_id', FILTER_VALIDATE_INT);
+        $type_id = filter_input(INPUT_POST, 'type_id', FILTER_VALIDATE_INT);
+        
         $newProduct = new Product();
-        $newProduct->setName($_POST["name"]);
-        $newProduct->setDescription($_POST["description"]);
-        $newProduct->setPicture($_POST["picture"]);
-        $newProduct->setPrice($_POST["price"]);
-        $newProduct->setRate($_POST["rate"]);
-        $newProduct->setStatus($_POST["status"]);
-        $newProduct->setBrandId($_POST["brand_id"]);
-        $newProduct->setCategoryId($_POST["category_id"]);
-        $newProduct->setTypeId($_POST["type_id"]);
+        $newProduct->setName($name);
+        $newProduct->setDescription($description);
+        $newProduct->setPicture($picture);
+        $newProduct->setPrice($price);
+        $newProduct->setRate($rate);
+        $newProduct->setStatus($status );
+        $newProduct->setBrandId( $brand_id);
+        $newProduct->setCategoryId($category_id);
+        $newProduct->setTypeId($type_id );
         $newProduct->insert();
-        header('Location:/products');
+        
+        header('Location:'.$_SERVER['BASE_URI'].'/products');
         // j'ai besoin des infos qui sont dans $_POST
         // j'ai besoin du model pour inserer en base
         // j'insère en base

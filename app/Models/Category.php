@@ -98,7 +98,7 @@ class Category extends CoreModel {
      * @param int $categoryId ID de la catégorie
      * @return Category
      */
-    public function find($categoryId)
+    public static function find($categoryId)
     {
         // se connecter à la BDD
         $pdo = Database::getPDO();
@@ -168,8 +168,8 @@ class Category extends CoreModel {
     public function insert()
     {
         $pdo = Database::getPDO();
-        $sql = "INSERT INTO `category`(name, subtitle, picture)
-        VALUES ('{$this->name}', '{$this->subtitle}', '{$this->picture}')";
+        $sql = "INSERT INTO `category`(name, subtitle, picture, home_order, created_at, updated_at)
+        VALUES ('{$this->name}', '{$this->subtitle}', '{$this->picture}', 0, now(), NULL)";
         
        // Execution de la requête d'insertion (exec, pas query)
        $insertedRows = $pdo->exec($sql);

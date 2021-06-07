@@ -2,7 +2,7 @@
         <a href="<?=$router->generate('products')?>" class="btn btn-success float-right">Retour</a>
         <h2>Ajouter un produit</h2>
         
-        <form action="/product/create" method="POST" class="mt-5">
+        <form action="" method="POST" class="mt-5">
             <div class="form-group">
                 <label for="name">Nom</label>
                 <input type="text" name="name" class="form-control" id="name" placeholder="Nom du produit">
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label for="brand_id">Id de la Marque</label>
-                <input type="number" name="brand_id" class="form-control" id="brand_id" placeholder="Ex: 1">
+                <input type="number"  name="brand_id" class="form-control" id="brand_id" placeholder="Ex: 1">
             </div>
             <div class="form-group">
                 <label for="category_id">Id de la catégorie</label>
@@ -40,7 +40,7 @@
             </div>
             <div class="form-group">
                 <label for="type_id">Id du type</label>
-                <input type="number" name="type_id" class="form-control" id="type_id" placeholder="Ex : 1">
+                <input type="number"  name="type_id" class="form-control" id="type_id" placeholder="Ex : 1">
             </div>
             <button type="submit" class="btn btn-primary btn-block mt-5">Valider</button>
         </form>

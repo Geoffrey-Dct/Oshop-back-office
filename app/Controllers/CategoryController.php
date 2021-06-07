@@ -32,18 +32,34 @@ class CategoryController extends CoreController
         // de quoi j'ai besoin ??
         //TODO dd($_POST);
         //dd($_POST);
+        $name = filter_input(INPUT_POST, 'name');
+        $subtitle = filter_input(INPUT_POST, 'subtitle');
+        $picture = filter_input(INPUT_POST, 'picture');
+
+
         $newCategorie = new Category();
-        $newCategorie->setName($_POST["name"]);
-        $newCategorie->setSubtitle($_POST["subtitle"]);
-        $newCategorie->setPicture($_POST["picture"]);
+        $newCategorie->setName($name);
+        $newCategorie->setSubtitle($subtitle);
+        $newCategorie->setPicture($picture);
         $newCategorie->insert();
-        header('Location:/categories');
+        header('Location:'.$_SERVER['BASE_URI'].'/categories');
         // j'ai besoin des infos qui sont dans $_POST
         // j'ai besoin du model pour inserer en base
         // j'insère en base
         // normalement j'affiche quelquechose  ??? lecture CDC
         // CDC dit rediriger vers la liste avec header()
 
+    }
+
+    public function update($param)
+    {
+        
+        $categoryId = $param;
+        //dd($categoryId);
+        $category= Category::find($categoryId);
+        $viewVars['categoryId']=$categoryId;
+        $viewVars['category']= $category;
+        $this->show('update/category_update', $viewVars);
     }
     
 }

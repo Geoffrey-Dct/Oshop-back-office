@@ -93,22 +93,41 @@ $router->map(
 
 $router->map(
     'POST',
-    '/category/create',
+    '/category_add',
     [
         'method'=>'create',
         'controller'=>'\App\Controllers\CategoryController'
     ],
     'category-create'
 );
+$router->map(
+    'GET',
+    '/category_update/[i:id]',
+    [
+        'method'=>'update',
+        'controller'=>'\App\Controllers\CategoryController'
+    ],
+    'category-update'
+);
 
 $router->map(
     'POST',
-    '/product/create',
-    [
+    '/product_add',
+    [ 
         'method'=>'create',
         'controller'=>'\App\Controllers\ProductController'
     ],
     'product-create'
+);
+
+$router->map(
+    'GET',
+    '/product_update',
+    [
+        'method'=>'update',
+        'controller'=>'\App\Controllers\ProductController'
+    ],
+    'product-update'
 );
 /* -------------
 --- DISPATCH ---
