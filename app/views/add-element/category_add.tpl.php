@@ -21,6 +21,11 @@
                     URL relative d'une image (jpg, gif, svg ou png) fournie sur <a href="https://benoclock.github.io/S06-images/" target="_blank">cette page</a>
                 </small>
             </div>
+            <div class="form-group">
+                <label for="picture">home_order</label>
+                <input type="number" value="0" name="home_order" class="form-control" id="home_order" placeholder="de 1 à 5" min="0" max="5">
+                
+            </div>
             <button type="submit" class="btn btn-primary btn-block mt-5">Valider</button>
         </form>
     </div>

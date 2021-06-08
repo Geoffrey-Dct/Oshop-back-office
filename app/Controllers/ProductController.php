@@ -100,6 +100,6 @@ class ProductController extends CoreController {
         $newProduct->setTypeId($type_id );
         $newProduct->update($productId); 
 
-        header('Location:'.$_SERVER['BASE_URI'].'/products');
+        header('Location:/products');
     }
 }

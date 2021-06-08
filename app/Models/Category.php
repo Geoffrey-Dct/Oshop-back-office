@@ -188,4 +188,36 @@ class Category extends CoreModel {
        return false;
         
     }
+
+    public function update($id)
+    {
+        
+        $pdo = Database::getPDO();
+
+        $sql = "
+        UPDATE `category`
+        SET `name` = :name,
+        `subtitle`= :subtitle,
+        `picture`= :picture,
+        `home_order`= :home_order
+        WHERE `id`= :id";
+
+        $pdoStatement = $pdo->prepare($sql);
+        //dd($pdoStatement);
+        
+        $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
+        //dd($l);
+        $pdoStatement->bindValue(':name', $this->name, PDO::PARAM_STR);
+        
+        $pdoStatement->bindValue(':subtitle', $this->subtitle, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':picture', $this->picture, PDO::PARAM_STR);
+        
+        $pdoStatement->bindValue(':home_order', $this->home_order, PDO::PARAM_INT);
+        
+
+        $requeteOk = $pdoStatement->execute();
+        //dd($requeteOk);
+        
+        return $requeteOk;
+    }
 }

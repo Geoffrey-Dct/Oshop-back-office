@@ -112,6 +112,16 @@ $router->map(
 
 $router->map(
     'POST',
+    '/category_update/[i:id]',
+    [
+        'method'=>'update',
+        'controller'=>'\App\Controllers\CategoryController'
+    ],
+    'category_updated'
+);
+
+$router->map(
+    'POST',
     '/product_add',
     [ 
         'method'=>'create',

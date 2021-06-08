@@ -57,9 +57,29 @@ class CategoryController extends CoreController
         $categoryId = $param;
         //dd($categoryId);
         $category= Category::find($categoryId);
-        $viewVars['categoryId']=$categoryId;
+        
         $viewVars['category']= $category;
         $this->show('update/category_update', $viewVars);
     }
     
+    public function update($param)
+    {
+        $categoryId=$param;
+        
+        //dd($categoryId);
+
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $subtitle = filter_input(INPUT_POST, 'subtitle', FILTER_SANITIZE_STRING);
+        $picture = filter_input(INPUT_POST, 'picture', FILTER_SANITIZE_STRING);
+        $homeOrder = filter_input(INPUT_POST, 'home_order', FILTER_VALIDATE_INT);
+
+        $newCategorie = new Category();
+        $newCategorie->setName($name);
+        $newCategorie->setSubtitle($subtitle);
+        $newCategorie->setPicture($picture);
+        $newCategorie->setHomeOrder($homeOrder);
+        $newCategorie->update($categoryId);
+        
+        header('Location:/categories');
+    }
 }

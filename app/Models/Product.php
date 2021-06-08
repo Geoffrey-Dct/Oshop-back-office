@@ -191,7 +191,7 @@ class Product extends CoreModel {
         $pdoStatement->bindValue(':type_id', $this->type_id, PDO::PARAM_INT);
 
         $requeteReussi = $pdoStatement->execute();
-        
+        //dd($requeteReussi);
         return $requeteReussi;
     }
     /**
