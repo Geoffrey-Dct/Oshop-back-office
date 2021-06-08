@@ -148,6 +148,26 @@ $router->map(
     ],
     'product_updated'
 );
+
+$router->map(
+    'GET',
+    '/connexion',
+    [
+        'method'=>'connect',
+        'controller'=>'\App\Controllers\UserController'  
+    ],
+    'connect'
+);
+
+$router->map(
+    'POST',
+    '/connexion',
+    [
+        'method'=>'connecting',
+        'controller'=>'\App\Controllers\UserController'  
+    ],
+    'connected'
+);
 /* -------------
 --- DISPATCH ---
 --------------*/
