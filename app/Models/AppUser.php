@@ -32,6 +32,40 @@ class AppUser extends CoreModel
 
     public function insert()
     {
+        $pdo = Database::getPDO();
+        $sql = "
+            INSERT INTO `app_user` (
+              `email`,
+              `password`,
+              `lastname`,
+              `firstname`,
+              `role`,
+              `status`
+              
+            )
+            VALUES (
+              :email,
+              :password,
+              :lastname,
+              :firstname,
+              :role,
+              :status
+              
+            )
+        ";
+
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':password', $this->password, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':role', $this->role, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':status', $this->status, PDO::PARAM_INT);
+
+        $requeteReussi = $pdoStatement->execute();
+        
+        return $requeteReussi;
+
 
     }
 

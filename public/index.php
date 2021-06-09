@@ -191,7 +191,29 @@ $router->map(
     ],
     'users'
 
-    );
+);
+$router->map(
+    'GET',
+    '/user_add',
+    [
+        'method' => 'userAdd',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-add'
+);
+
+
+$router->map(
+    'POST',
+    '/user_add',
+    [
+        'method'=>'create',
+        'controller'=>'\App\Controllers\UserController'
+    ],
+    'user-create'
+
+    );  
+    
 /* -------------
 --- DISPATCH ---
 --------------*/

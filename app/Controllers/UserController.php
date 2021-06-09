@@ -60,9 +60,41 @@ class UserController extends CoreController
     public function users()
     {
         $rolesRequis[]='admin';
+        $rolesRequis[]='superadmin';
         $this->checkAuthorization($rolesRequis);
         $users=AppUser::findAll();
         $viewVars['users'] = $users;
         $this->show('list/users', $viewVars);
+    }
+
+    public function create()
+    {
+        $rolesRequis[]='superadmin';
+        $this->checkAuthorization($rolesRequis);
+        $email=filter_input(INPUT_POST,'email', FILTER_SANITIZE_EMAIL);
+        $password=filter_input(INPUT_POST,'password', FILTER_SANITIZE_STRING);
+        $name=filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $firstname=filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
+        $role=filter_input(INPUT_POST,'role', FILTER_SANITIZE_STRING);
+        $status=filter_input(INPUT_POST,'status', FILTER_VALIDATE_INT);
+
+        $newUser = new AppUser;
+        $newUser->setEmail($email);
+        $newUser->setPassword($password);
+        $newUser->setLastname($name);
+        $newUser->setFirstname($firstname);
+        $newUser->setRole($role);
+        $newUser->setStatus($status);
+        $newUser->insert();
+
+        global $router;
+        header('Location:'.$router->generate('users'));
+    }
+
+    public function userAdd()
+    {
+        $rolesRequis[]='superadmin';
+        $this->checkAuthorization($rolesRequis);
+        $this->show('add-element/user_add');
     }
 }   
