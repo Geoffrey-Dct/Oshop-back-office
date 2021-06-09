@@ -7,6 +7,11 @@ class CategoryController extends CoreController
 {
     public function categories()
     {
+        $rolesRequis[] = 'catalog-manager';
+        $rolesRequis[] = 'admin';
+        // pas besoin de tester le retour de la fonction
+        // car elle vire les gens si c'est pas bon.
+        $this->checkAuthorization($rolesRequis);
         $categoryModel = new Category;
         $categories = $categoryModel->findAll();
         //dd($categories);

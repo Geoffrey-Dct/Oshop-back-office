@@ -22,7 +22,12 @@ class AppUser extends CoreModel
 
     public static function findAll()
     {
-
+        $pdo = Database::getPDO();
+        $sql = 'SELECT * FROM `app_user`';
+        $pdoStatement = $pdo->query($sql);
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\AppUser');
+        
+        return $results;
     }
 
     public function insert()
@@ -51,9 +56,9 @@ class AppUser extends CoreModel
         $pdoStatement->bindValue(':email', $email, PDO::PARAM_STR);
 
         
-        $requeteOk = $pdoStatement->execute(); 
+        $requete = $pdoStatement->execute(); 
 
-        if($requeteOk===true){
+        if($requete===true){
             $result = $pdoStatement->fetchObject('App\Models\AppUser');
             return $result;
         }

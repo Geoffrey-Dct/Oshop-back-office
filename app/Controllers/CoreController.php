@@ -39,4 +39,39 @@ class CoreController {
         require_once __DIR__.'/../views/'.$viewName.'.tpl.php';
         require_once __DIR__.'/../views/layout/footer.tpl.php';
     }
+
+    /**
+     * Méthode de vérification des droits d'entrée 
+     * @param array $rolesRequis
+     */
+    protected function checkAuthorization($rolesRequis = [])
+    {
+        global $router;
+        // si la personne n'est pas loggué
+        if (!isset($_SESSION['userObject']))
+        {
+            // il est rentré par la fenètre ???
+            header('Location: ' . $router->generate('connect'));
+            exit();
+        }
+
+        // qu'est ce que je doit vérifier ?
+        // je doit vérifier si le role de l'utilisateur via $_SESSION
+        // correspond aux droitsRequis par le controller, donné en paramètre
+        
+        // je récupère mon user
+        $user = $_SESSION['userObject'];
+
+        $roleUser = $user->getRole();
+
+        foreach ($rolesRequis as $role) {
+            if ($roleUser === $role){
+                return true;
+            }
+        }
+
+        // qu'est ce que je fait si l'utilisateur n'a pas les droits ?
+        http_response_code(403);
+        exit();
+    }
 }
